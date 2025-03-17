@@ -31,6 +31,45 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
+4. Install the package in development mode to enable command-line tools:
+
+```bash
+pip install -e .
+```
+
+## Command-Line Interface
+
+The package provides several command-line tools for managing the Solr citation graph collection:
+
+### Collection Management
+
+```bash
+# Check if the citation_graph collection exists
+check-solr-collection
+
+# Create a new citation_graph collection with proper schema
+create-solr-collection
+
+# Delete the citation_graph collection
+delete-solr-collection
+
+# Recreate the collection (delete if exists and create new)
+recreate-solr-collection
+
+# Get a random sample of 10 documents from the collection
+get-random-sample
+```
+
+### Data Ingestion
+
+```bash
+# Ingest citations from a JSON file
+ingest-citations PATH_TO_JSON_FILE --batch-size 1000
+```
+
+Options:
+- `--batch-size`: Number of records to send in each batch (default: 1000)
+
 ## Usage
 
 Run the citation graph example:
