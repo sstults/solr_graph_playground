@@ -1,0 +1,36 @@
+
+services:
+  zookeeper:
+    image: zookeeper:3.6
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181
+
+  solr:
+    image: solr:7.7.3
+    ports:
+      - "8983:8983"
+    volumes:
+      - solr_data:/var/solr
+    command:
+      - solr
+      - start
+      - -cloud
+      - -f
+      - -z
+      - zookeeper:2181
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8983/solr/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - SOLR_HEAP=1g
+      - ZK_HOST=zookeeper:2181
+
+volumes:
+  solr_data:
