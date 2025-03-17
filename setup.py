@@ -16,6 +16,8 @@ setup(
             'create-solr-collection=solr_graph_playground.solr_setup:create_collection',
             'delete-solr-collection=solr_graph_playground.solr_setup:delete_collection',
             'recreate-solr-collection=solr_graph_playground.solr_setup:recreate_collection',
+            'ingest-citations=solr_graph_playground.solr_setup:ingest_citations',
+            'get-random-sample=solr_graph_playground.solr_setup:get_random_sample',
         ],
     },
     author="Scott Stults",

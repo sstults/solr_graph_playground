@@ -56,8 +56,8 @@ delete-solr-collection
 # Recreate the collection (delete if exists and create new)
 recreate-solr-collection
 
-# Get a random sample of 10 documents from the collection
-get-random-sample
+# Get a random sample of documents from the collection
+get-random-sample NUM_SAMPLES
 ```
 
 ### Data Ingestion
@@ -72,17 +72,20 @@ Options:
 
 ## Usage
 
-Run the citation graph example:
+The repository includes example JSON files in the `examples` directory:
+- `dblp_sample.json`: A sample dataset of academic papers and their citations
+- `dblp_single.json`: A single paper record for testing
+
+You can use these files with the data ingestion command to populate your Solr collection:
 
 ```bash
-python examples/citation_graph.py
+ingest-citations examples/dblp_sample.json
 ```
 
 This will:
-
-1. Create a graph of academic papers with metadata (title, authors, year, journal)
+1. Load academic papers with metadata (title, authors, year, journal)
 2. Establish citation relationships between papers
-3. Demonstrate various graph queries like:
+3. Allow you to perform various graph queries through Solr like:
    - Finding papers that cite a specific paper
    - Finding papers cited by a given paper
    - Searching papers by year or other metadata

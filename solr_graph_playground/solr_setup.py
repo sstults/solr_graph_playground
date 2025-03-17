@@ -126,8 +126,13 @@ def delete_collection():
     print("Collection deleted successfully")
 
 @cli.command()
-def get_random_sample():
-    """Get 10 random documents from the collection using Solr's random sort"""
+@click.argument('num_samples', type=int)
+def get_random_sample(num_samples):
+    """Get random documents from the collection using Solr's random sort
+
+    Arguments:
+        num_samples: Number of random samples to retrieve
+    """
     if not collection_exists():
         print("citation_graph collection does not exist")
         return
@@ -139,7 +144,7 @@ def get_random_sample():
     r = requests.get('http://localhost:8983/solr/citation_graph/select',
                     params={
                         'q': '*:*',
-                        'rows': '10',
+                        'rows': str(num_samples),
                         'sort': f'random_{seed} desc'
                     })
     
